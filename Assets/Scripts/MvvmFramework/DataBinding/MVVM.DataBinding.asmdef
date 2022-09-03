@@ -1,0 +1,16 @@
+{
+    "name": "MVVM.DataBinding",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2bc7e8ea7d9b1394e930d377d52df99f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
