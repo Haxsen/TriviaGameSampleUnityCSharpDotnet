@@ -570,6 +570,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: ODIN_INSPECTOR
     4: ODIN_INSPECTOR
+    7: ODIN_INSPECTOR
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
