@@ -568,6 +568,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
+    1: ODIN_INSPECTOR
     4: ODIN_INSPECTOR
   additionalCompilerArguments: {}
   platformArchitecture: {}
