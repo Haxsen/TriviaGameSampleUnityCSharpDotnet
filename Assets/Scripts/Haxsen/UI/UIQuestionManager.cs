@@ -13,6 +13,8 @@ namespace Haxsen.Game
     public class UIQuestionManager : MonoBehaviour
     {
         public static UnityAction ActionPerformedOnQuestion;
+
+        [SerializeField] private GameSessionManager gameSessionManager;
         
         [SerializeField] private TextMeshProUGUI categoryLabel;
         [SerializeField] private TextMeshProUGUI questionNumberLabel;
@@ -22,11 +24,12 @@ namespace Haxsen.Game
 
         private string _correctAnswer;
 
-        public void DisplayQuestion(QuestionStructure questionStructure, int number, int total)
+        public void DisplayQuestions(QuestionStructure questionStructure, int number, int total)
         {
             categoryLabel.text = questionStructure.category;
             questionNumberLabel.text = string.Concat("Question ", number, "/", total);
             questionDescription.text = HttpUtility.HtmlDecode(questionStructure.question);
+            
             UpdateAnswerList(questionStructure);
         }
 
@@ -54,14 +57,24 @@ namespace Haxsen.Game
         private IEnumerator NextQuestionState()
         {
             yield return new WaitForSeconds(1);
-            int countdown = 3;
-            displayAnswerButton.UpdateCountdown(countdown);
             displayAnswerButton.ResetColors();
+
+            int nextQuestionNumber = gameSessionManager.GetCurrentQuestionNumber() + 1;
+            if (nextQuestionNumber < gameSessionManager.GetTotalQuestions())
+            {
+                displayAnswerButton.SetCountdownPrefixToNext();
+            }
+            else
+            {
+                displayAnswerButton.SetCountdownPrefixToGameEnd();
+            }
+            
+            int countdown = 3;
             while (countdown >= 0)
             {
+                displayAnswerButton.UpdateCountdown(countdown);
                 yield return new WaitForSeconds(1);
                 countdown--;
-                displayAnswerButton.UpdateCountdown(countdown);
             }
             
             displayAnswerButton.ResetButton();

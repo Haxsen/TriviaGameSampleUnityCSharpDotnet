@@ -927,6 +927,7 @@ MonoBehaviour:
   buttonImage: {fileID: 622701729}
   textMesh: {fileID: 691736025}
   uIColorOptionsSO: {fileID: 11400000, guid: af82892e0e91b3042ac111b6554fcf47, type: 2}
+  uILabelOptionsSO: {fileID: 11400000, guid: e2e0e68b98fdd4c4c819e5c0f0a82a53, type: 2}
 --- !u!1 &648041027
 GameObject:
   m_ObjectHideFlags: 0
@@ -1745,6 +1746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f42ec72c92b84d60ade72ff5db592649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSessionManager: {fileID: 1812814732}
   categoryLabel: {fileID: 1797957422}
   questionNumberLabel: {fileID: 1992905665}
   questionDescription: {fileID: 1823516998}
@@ -3782,6 +3784,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameEventsSO: {fileID: 11400000, guid: 2d14e72c287821442ba608b226f7a0d9, type: 2}
   gameSessionManager: {fileID: 1812814732}
+  onGameEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1812814730}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1512609567}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1704959330
 GameObject:
   m_ObjectHideFlags: 0
@@ -4526,6 +4555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uIQuestionManager: {fileID: 766491618}
+  gameEventsSO: {fileID: 11400000, guid: 2d14e72c287821442ba608b226f7a0d9, type: 2}
 --- !u!1 &1823516996
 GameObject:
   m_ObjectHideFlags: 0

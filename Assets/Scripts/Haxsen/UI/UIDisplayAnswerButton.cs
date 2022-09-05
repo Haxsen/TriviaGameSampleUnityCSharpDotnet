@@ -12,8 +12,10 @@ namespace Haxsen.UI
         [SerializeField] private TextMeshProUGUI textMesh;
 
         [SerializeField] private UIColorOptionsSO uIColorOptionsSO;
+        [SerializeField] private UILabelOptionsSO uILabelOptionsSO;
 
         private Color _originalButtonImageColor;
+        private string _countdownPrefix;
 
         private void Awake()
         {
@@ -28,18 +30,28 @@ namespace Haxsen.UI
             buttonImage.color = uIColorOptionsSO.GetButtonColor(isCorrect);
             textMesh.color = Color.white;
 
-            textMesh.text = isCorrect ? "Correct" : "Wrong!";
+            textMesh.text = isCorrect ? uILabelOptionsSO.correctAnswerLabel : uILabelOptionsSO.incorrectAnswerLabel;
         }
 
         public void AnswerDisplayed()
         {
             button.interactable = false;
-            textMesh.text = "Answer is shown in Green";
+            textMesh.text = uILabelOptionsSO.answerShownLabel;
+        }
+
+        public void SetCountdownPrefixToNext()
+        {
+            _countdownPrefix = uILabelOptionsSO.nextQuestionPrefixLabel;
+        }
+
+        public void SetCountdownPrefixToGameEnd()
+        {
+            _countdownPrefix = uILabelOptionsSO.gameEndPrefixLabel;
         }
 
         public void UpdateCountdown(int secondsRemaining)
         {
-            textMesh.text = string.Concat("Next Question in ",secondsRemaining.ToString(), " seconds");
+            textMesh.text = string.Concat(_countdownPrefix,secondsRemaining.ToString(), " ", uILabelOptionsSO.secondsLabel);
         }
 
         public void ResetColors()
@@ -50,7 +62,7 @@ namespace Haxsen.UI
 
         public void ResetButton()
         {
-            textMesh.text = "Display Answer";
+            textMesh.text = uILabelOptionsSO.displayAnswerLabel;
             button.interactable = true;
         }
     }

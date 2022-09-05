@@ -1,6 +1,7 @@
 ﻿using Haxsen.DataStructures;
 using Haxsen.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Haxsen.Game
 {
@@ -9,19 +10,29 @@ namespace Haxsen.Game
         [SerializeField] private GameEventsSO gameEventsSO;
         [SerializeField] private GameSessionManager gameSessionManager;
 
+        [Header("Events")]
+        [SerializeField] private UnityEvent onGameEnd;
+
         private void OnEnable()
         {
             gameEventsSO.OnJsonReceived += StartGameWithJson;
+            gameEventsSO.OnGameSessionCompleted += ShowGameEnd;
         }
 
         private void OnDisable()
         {
             gameEventsSO.OnJsonReceived -= StartGameWithJson;
+            gameEventsSO.OnGameSessionCompleted -= ShowGameEnd;
         }
 
         private void StartGameWithJson(JsonResponseStructure jsonResponseStructure)
         {
             gameSessionManager.CreateGameSessionWithJson(jsonResponseStructure);
+        }
+
+        private void ShowGameEnd()
+        {
+            onGameEnd?.Invoke();
         }
     }
 }

@@ -8,5 +8,6 @@ namespace Haxsen.ScriptableObjects
     public class GameEventsSO : ScriptableObject
     {
         public UnityAction<JsonResponseStructure> OnJsonReceived;
+        public UnityAction OnGameSessionCompleted;
     }
 }

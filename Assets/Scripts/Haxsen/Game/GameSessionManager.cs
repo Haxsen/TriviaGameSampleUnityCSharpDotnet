@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Haxsen.DataStructures;
+using Haxsen.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +11,7 @@ namespace Haxsen.Game
         public static UnityAction ProceedToNextQuestion;
         
         [SerializeField] private UIQuestionManager uIQuestionManager;
+        [SerializeField] private GameEventsSO gameEventsSO;
     
         private List<QuestionStructure> _questionList;
         private int _currentQuestion = -1;
@@ -35,19 +37,29 @@ namespace Haxsen.Game
         {
             _currentQuestion++;
 
-            int totalQuestions = _questionList.Count;
-            if (_currentQuestion >= totalQuestions)
+            if (_currentQuestion >= GetTotalQuestions())
+            {
+                FinishSession();
                 return;
+            }
             
-            uIQuestionManager.DisplayQuestion(
+            uIQuestionManager.DisplayQuestions(
                 _questionList[_currentQuestion],
                 _currentQuestion+1,
-                totalQuestions);
+                GetTotalQuestions());
         }
 
         private void ResetGameSession()
         {
             _currentQuestion = -1;
         }
+
+        private void FinishSession()
+        {
+            gameEventsSO.OnGameSessionCompleted?.Invoke();
+        }
+
+        public int GetTotalQuestions() => _questionList.Count;
+        public int GetCurrentQuestionNumber() => _currentQuestion;
     }
 }
