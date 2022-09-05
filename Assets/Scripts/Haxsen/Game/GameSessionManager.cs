@@ -43,7 +43,7 @@ namespace Haxsen.Game
                 return;
             }
             
-            uIQuestionManager.DisplayQuestions(
+            uIQuestionManager.DisplayQuestion(
                 _questionList[_currentQuestion],
                 _currentQuestion+1,
                 GetTotalQuestions());

@@ -8,6 +8,7 @@ namespace Haxsen.ScriptableObjects
     {
         [SerializeField] private int numberOfQuestionsToFetch = 10;
         [SerializeField] private int selectedCategory;
+        [SerializeField] private string categoriesUrl;
         
         private string _url;
         
@@ -16,6 +17,8 @@ namespace Haxsen.ScriptableObjects
             BuildUrl();
             return _url;
         }
+
+        public string GetCategoriesUrl() => categoriesUrl;
         
         public void SetAmount(int amount)
         {
@@ -26,6 +29,8 @@ namespace Haxsen.ScriptableObjects
         {
             selectedCategory = categoryNumber;
         }
+
+        public void ResetCategories() => selectedCategory = 0;
         
         private void BuildUrl()
         {

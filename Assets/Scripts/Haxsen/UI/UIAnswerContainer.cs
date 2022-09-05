@@ -28,10 +28,7 @@ namespace Haxsen.UI
 
         public void ClearAnswers()
         {
-            for (int i = 1; i < transform.childCount; i++)
-            {
-                Destroy(transform.GetChild(i).gameObject);
-            }
+            Helper.DestroyChildrenOfList(transform, 1);
         }
 
         public void ShowCorrectAnswer()

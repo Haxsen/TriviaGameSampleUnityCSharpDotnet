@@ -1,0 +1,24 @@
+﻿using System.Linq;
+using Haxsen.DataStructures;
+using Haxsen.ScriptableObjects;
+using UnityEngine;
+
+namespace Haxsen.UI
+{
+    public class UICategoryManager : MonoBehaviour
+    {
+        [SerializeField] private OpenTdbOptionsSO openTdbOptionsSO;
+
+        [SerializeField] private UICategoryContainer uICategoryContainer;
+
+        public void UpdateCategoryList(JsonResponseCategoryStructure jsonResponseCategoryStructure)
+        {
+            uICategoryContainer.DisplayCategories(jsonResponseCategoryStructure.trivia_categories.ToList());
+        }
+
+        public void SetCategory(int index)
+        {
+            openTdbOptionsSO.SetCategory(index);
+        }
+    }
+}

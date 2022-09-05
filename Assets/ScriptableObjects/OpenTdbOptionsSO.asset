@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfQuestionsToFetch: 10
   selectedCategory: 0
+  categoriesUrl: https://opentdb.com/api_category.php

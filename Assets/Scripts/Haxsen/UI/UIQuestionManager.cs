@@ -24,7 +24,7 @@ namespace Haxsen.Game
 
         private string _correctAnswer;
 
-        public void DisplayQuestions(QuestionStructure questionStructure, int number, int total)
+        public void DisplayQuestion(QuestionStructure questionStructure, int number, int total)
         {
             categoryLabel.text = questionStructure.category;
             questionNumberLabel.text = string.Concat("Question ", number, "/", total);

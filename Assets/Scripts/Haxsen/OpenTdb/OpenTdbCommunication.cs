@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Text.RegularExpressions;
-using System.Web;
 using Haxsen.DataStructures;
 using Haxsen.ScriptableObjects;
 using Haxsen.Singleton;
@@ -15,15 +13,26 @@ namespace Haxsen.OpenTdb
         [SerializeField] private OpenTdbOptionsSO openTdbOptionsSO;
         [SerializeField] private GameEventsSO gameEventsSO;
 
-        public void SendReq()
+        public void SendRequestQuestions()
         {
-            GetOpenTdbJson(Success, Fail);
+            GetOpenTdbQuestionsJson(JsonQuestionsSuccess, Fail);
         }
 
-        private void Success(JsonResponseQuestionStructure json)
+        public void SendRequestCategories()
+        {
+            GetOpenTdbCategoriesJson(JsonCategoriesSuccess, Fail);
+        }
+
+        private void JsonQuestionsSuccess(JsonResponseQuestionStructure json)
         {
             Debug.Log(json.ToString());
-            gameEventsSO.OnJsonReceived.Invoke(json);
+            gameEventsSO.OnJsonQuestionsReceived.Invoke(json);
+        }
+
+        private void JsonCategoriesSuccess(JsonResponseCategoryStructure json)
+        {
+            Debug.Log(json.ToString());
+            gameEventsSO.OnJsonCategoriesReceived.Invoke(json);
         }
 
         private void Fail(string message)
@@ -36,9 +45,19 @@ namespace Haxsen.OpenTdb
         /// </summary>
         /// <param name="callbackOnSuccess">Callback on success.</param>
         /// <param name="callbackOnFail">Callback on fail.</param>
-        public void GetOpenTdbJson(UnityAction<JsonResponseQuestionStructure> callbackOnSuccess, UnityAction<string> callbackOnFail)
+        public void GetOpenTdbQuestionsJson(UnityAction<JsonResponseQuestionStructure> callbackOnSuccess, UnityAction<string> callbackOnFail)
         {
             SendRequest(openTdbOptionsSO.GetUrl(), callbackOnSuccess, callbackOnFail);
+        }
+        
+        /// <summary>
+        /// This method call server API to get a quote.
+        /// </summary>
+        /// <param name="callbackOnSuccess">Callback on success.</param>
+        /// <param name="callbackOnFail">Callback on fail.</param>
+        public void GetOpenTdbCategoriesJson(UnityAction<JsonResponseCategoryStructure> callbackOnSuccess, UnityAction<string> callbackOnFail)
+        {
+            SendRequest(openTdbOptionsSO.GetCategoriesUrl(), callbackOnSuccess, callbackOnFail);
         }
 
         /// <summary>
@@ -88,9 +107,6 @@ namespace Haxsen.OpenTdb
         /// <typeparam name="T">Data Model Type.</typeparam>
         private void ParseResponse<T>(string data, UnityAction<T> callbackOnSuccess, UnityAction<string> callbackOnFail)
         {
-            // data = data.Replace("&quote;", "\\\"");
-            // data = HttpUtility.HtmlDecode(data);
-            // Debug.Log(data);
             var parsedData = JsonUtility.FromJson<T>(data);
             callbackOnSuccess?.Invoke(parsedData);
         }
