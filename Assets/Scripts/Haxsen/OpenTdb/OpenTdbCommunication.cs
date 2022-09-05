@@ -20,7 +20,7 @@ namespace Haxsen.OpenTdb
             GetOpenTdbJson(Success, Fail);
         }
 
-        private void Success(JsonResponseStructure json)
+        private void Success(JsonResponseQuestionStructure json)
         {
             Debug.Log(json.ToString());
             gameEventsSO.OnJsonReceived.Invoke(json);
@@ -36,7 +36,7 @@ namespace Haxsen.OpenTdb
         /// </summary>
         /// <param name="callbackOnSuccess">Callback on success.</param>
         /// <param name="callbackOnFail">Callback on fail.</param>
-        public void GetOpenTdbJson(UnityAction<JsonResponseStructure> callbackOnSuccess, UnityAction<string> callbackOnFail)
+        public void GetOpenTdbJson(UnityAction<JsonResponseQuestionStructure> callbackOnSuccess, UnityAction<string> callbackOnFail)
         {
             SendRequest(openTdbOptionsSO.GetUrl(), callbackOnSuccess, callbackOnFail);
         }

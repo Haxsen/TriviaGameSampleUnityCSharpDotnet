@@ -25,9 +25,9 @@ namespace Haxsen.Game
             gameEventsSO.OnGameSessionCompleted -= ShowGameEnd;
         }
 
-        private void StartGameWithJson(JsonResponseStructure jsonResponseStructure)
+        private void StartGameWithJson(JsonResponseQuestionStructure jsonResponseQuestionStructure)
         {
-            gameSessionManager.CreateGameSessionWithJson(jsonResponseStructure);
+            gameSessionManager.CreateGameSessionWithJson(jsonResponseQuestionStructure);
         }
 
         private void ShowGameEnd()

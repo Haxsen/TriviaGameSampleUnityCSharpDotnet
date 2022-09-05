@@ -26,10 +26,10 @@ namespace Haxsen.Game
             ProceedToNextQuestion -= DisplayNextQuestion;
         }
 
-        public void CreateGameSessionWithJson(JsonResponseStructure jsonResponseStructure)
+        public void CreateGameSessionWithJson(JsonResponseQuestionStructure jsonResponseQuestionStructure)
         {
             ResetGameSession();
-            _questionList = jsonResponseStructure.results;
+            _questionList = jsonResponseQuestionStructure.results;
             DisplayNextQuestion();
         }
 
