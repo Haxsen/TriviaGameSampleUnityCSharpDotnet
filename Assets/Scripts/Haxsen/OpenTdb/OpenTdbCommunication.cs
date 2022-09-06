@@ -38,6 +38,7 @@ namespace Haxsen.OpenTdb
         private void Fail(string message)
         {
             Debug.LogError(message);
+            gameEventsSO.OnOpenTdbRequestResultFail?.Invoke();
         }
         
         /// <summary>
@@ -69,6 +70,7 @@ namespace Haxsen.OpenTdb
         /// <typeparam name="T">Data Model Type.</typeparam>
         private void SendRequest<T>(string url, UnityAction<T> callbackOnSuccess, UnityAction<string> callbackOnFail)
         {
+            gameEventsSO.OnOpenTdbRequestStarted?.Invoke();
             StartCoroutine(RequestCoroutine(url, callbackOnSuccess, callbackOnFail));
         }
         
@@ -109,6 +111,7 @@ namespace Haxsen.OpenTdb
         {
             var parsedData = JsonUtility.FromJson<T>(data);
             callbackOnSuccess?.Invoke(parsedData);
+            gameEventsSO.OnOpenTdbRequestResultSuccess?.Invoke();
         }
     }
 }

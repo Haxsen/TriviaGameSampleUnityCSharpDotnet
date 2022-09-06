@@ -10,5 +10,8 @@ namespace Haxsen.ScriptableObjects
         public UnityAction<JsonResponseQuestionStructure> OnJsonQuestionsReceived;
         public UnityAction<JsonResponseCategoryStructure> OnJsonCategoriesReceived;
         public UnityAction OnGameSessionCompleted;
+        public UnityAction OnOpenTdbRequestStarted;
+        public UnityAction OnOpenTdbRequestResultSuccess;
+        public UnityAction OnOpenTdbRequestResultFail;
     }
 }

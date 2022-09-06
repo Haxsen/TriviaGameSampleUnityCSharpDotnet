@@ -15,6 +15,9 @@ namespace Haxsen.Game
         [SerializeField] private OpenTdbCommunication openTdbCommunication;
 
         [Header("Events")]
+        [SerializeField] private UnityEvent onOpenTdbRequestStarted;
+        [SerializeField] private UnityEvent onOpenTdbRequestResultSuccess;
+        [SerializeField] private UnityEvent onOpenTdbRequestResultFail;
         [SerializeField] private UnityEvent onGameEnd;
 
         private void OnEnable()
@@ -22,6 +25,10 @@ namespace Haxsen.Game
             gameEventsSO.OnJsonQuestionsReceived += StartGameWithJson;
             gameEventsSO.OnGameSessionCompleted += ShowGameEnd;
             gameEventsSO.OnJsonCategoriesReceived += UpdateCategoryScreen;
+
+            gameEventsSO.OnOpenTdbRequestStarted += onOpenTdbRequestStarted.Invoke;
+            gameEventsSO.OnOpenTdbRequestResultSuccess += onOpenTdbRequestResultSuccess.Invoke;
+            gameEventsSO.OnOpenTdbRequestResultFail += onOpenTdbRequestResultFail.Invoke;
         }
 
         private void OnDisable()
