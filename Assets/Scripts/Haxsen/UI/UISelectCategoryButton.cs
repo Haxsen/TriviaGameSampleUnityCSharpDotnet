@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using Haxsen.DataStructures;
 using TMPro;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace Haxsen.UI
         
         [SerializeField] private TextMeshProUGUI textMesh;
         
-        public int CategoryIndex { get; set; }
+        public CategoryStructure Category { get; set; }
 
         public void SetLabel(string label)
         {
@@ -19,7 +20,7 @@ namespace Haxsen.UI
 
         public void UpdateSelectedCategory()
         {
-            uICategoryManager.SetCategory(CategoryIndex);
+            uICategoryManager.SetCategory(Category);
         }
     }
 }

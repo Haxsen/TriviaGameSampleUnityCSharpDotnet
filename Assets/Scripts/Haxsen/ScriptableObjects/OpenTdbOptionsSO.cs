@@ -1,3 +1,4 @@
+using Haxsen.DataStructures;
 using Haxsen.OpenTdb;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace Haxsen.ScriptableObjects
     public class OpenTdbOptionsSO : ScriptableObject
     {
         [SerializeField] private int numberOfQuestionsToFetch = 10;
-        [SerializeField] private int selectedCategory;
+        [SerializeField] private CategoryStructure selectedCategory;
         [SerializeField] private string categoriesUrl;
         
         private string _url;
@@ -19,25 +20,29 @@ namespace Haxsen.ScriptableObjects
         }
 
         public string GetCategoriesUrl() => categoriesUrl;
+
+        public CategoryStructure GetSelectedCategory() => selectedCategory;
+
+        public bool IsSelectedCategoryValid() => OpenTdbUrlBuilder.isCategoryValid(selectedCategory.id);
         
         public void SetAmount(int amount)
         {
             numberOfQuestionsToFetch = amount;
         }
         
-        public void SetCategory(int categoryNumber)
+        public void SetCategory(CategoryStructure category)
         {
-            selectedCategory = categoryNumber;
+            selectedCategory = category;
         }
 
-        public void ResetCategories() => selectedCategory = 0;
+        public void ResetCategories() => selectedCategory.id = 0;
         
         private void BuildUrl()
         {
             Debug.Log("Building URL");
             _url = new OpenTdbUrlBuilder(OpenTdbConfig.OPENTDB_API_URL_FORMAT)
                 .AddAmount(numberOfQuestionsToFetch)
-                .SelectCategory(selectedCategory)
+                .SelectCategory(selectedCategory.id)
                 .Build();
         }
     }

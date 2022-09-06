@@ -5,6 +5,10 @@ namespace Haxsen.ScriptableObjects
     [CreateAssetMenu(fileName = "UILabelOptionsSO", menuName = "ScriptableObjects/UILabelOptions", order = 1)]
     public class UILabelOptionsSO : ScriptableObject
     {
+        [Header("Main Screen")]
+        public string playSelectedCategoryPrefixLabel = "Play {0}";
+        
+        [Header("Game Screen")]
         public string correctAnswerLabel = "Correct";
         public string incorrectAnswerLabel = "Wrong!";
         public string answerShownLabel = "Answer is shown.";

@@ -16,9 +16,9 @@ namespace Haxsen.UI
             uICategoryContainer.DisplayCategories(jsonResponseCategoryStructure.trivia_categories.ToList());
         }
 
-        public void SetCategory(int index)
+        public void SetCategory(CategoryStructure category)
         {
-            openTdbOptionsSO.SetCategory(index);
+            openTdbOptionsSO.SetCategory(category);
         }
     }
 }

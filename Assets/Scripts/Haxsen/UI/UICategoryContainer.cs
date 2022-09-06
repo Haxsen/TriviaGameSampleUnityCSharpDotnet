@@ -26,7 +26,7 @@ namespace Haxsen.UI
         {
             GameObject categoryButton = Instantiate(sampleCategoryButton, transform);
             UISelectCategoryButton categoryButtonComponent = categoryButton.GetComponent<UISelectCategoryButton>();
-            categoryButtonComponent.CategoryIndex = category.id;
+            categoryButtonComponent.Category = category;
             categoryButtonComponent.SetLabel(category.name);
             categoryButton.SetActive(true);
         }

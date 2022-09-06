@@ -37,14 +37,14 @@ namespace Haxsen.ScriptableObjects
             return finalUrl;
         }
 
+        public static bool isCategoryValid(int categoryNumber)
+        {
+            return categoryNumber >= 9 && categoryNumber <= 32;
+        }
+
         private bool isAmountValid(int amount)
         {
             return amount != 0;
-        }
-
-        private bool isCategoryValid(int categoryNumber)
-        {
-            return categoryNumber >= 9 && categoryNumber <= 32;
         }
     }
 }
