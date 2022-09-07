@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Haxsen.DataStructures;
+using Haxsen.DataObjects;
 using Haxsen.ScriptableObjects;
 using UnityEngine;
 

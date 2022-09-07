@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Haxsen.DataStructures;
+using Haxsen.DataObjects;
 using Haxsen.UI;
 using TMPro;
 using UnityEngine;

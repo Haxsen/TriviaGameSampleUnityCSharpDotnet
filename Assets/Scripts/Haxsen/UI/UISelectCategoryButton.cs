@@ -1,5 +1,5 @@
 ﻿using System.Web;
-using Haxsen.DataStructures;
+using Haxsen.DataObjects;
 using TMPro;
 using UnityEngine;
 

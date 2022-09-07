@@ -1,4 +1,4 @@
-﻿using Haxsen.DataStructures;
+﻿using Haxsen.DataObjects;
 using UnityEngine;
 using UnityEngine.Events;
 

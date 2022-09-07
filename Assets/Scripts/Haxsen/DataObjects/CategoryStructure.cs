@@ -1,4 +1,4 @@
-﻿namespace Haxsen.DataStructures
+﻿namespace Haxsen.DataObjects
 {
     [System.Serializable]
     public class CategoryStructure

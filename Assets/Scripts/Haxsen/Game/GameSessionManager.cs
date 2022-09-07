@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Haxsen.DataStructures;
+using Haxsen.DataObjects;
 using Haxsen.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Haxsen.DataStructures
+namespace Haxsen.DataObjects
 {
     [System.Serializable]
     public class JsonResponseQuestionStructure
