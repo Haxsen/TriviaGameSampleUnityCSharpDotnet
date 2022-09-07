@@ -1,5 +1,8 @@
 ﻿namespace Haxsen.DataObjects
 {
+    /// <summary>
+    /// Structure of a single question.
+    /// </summary>
     [System.Serializable]
     public class QuestionStructure
     {

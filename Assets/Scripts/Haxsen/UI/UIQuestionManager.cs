@@ -3,27 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Haxsen.DataObjects;
-using Haxsen.UI;
+using Haxsen.Game;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Haxsen.Game
+namespace Haxsen.UI
 {
+    /// <summary>
+    /// Manages the questions on the UI.
+    /// </summary>
     public class UIQuestionManager : MonoBehaviour
     {
-        public static UnityAction ActionPerformedOnQuestion;
+        // When a user does an action during a question
+        public UnityAction ActionPerformedOnQuestion;
+        
+        // When the game progresses to next question
+        public UnityAction ProceedToNextQuestion;
 
+        [Header("Functional component references")]
         [SerializeField] private GameSessionManager gameSessionManager;
         
         [SerializeField] private TextMeshProUGUI categoryLabel;
         [SerializeField] private TextMeshProUGUI questionNumberLabel;
         [SerializeField] private TextMeshProUGUI questionDescription;
+        
         [SerializeField] private UIAnswerContainer answersContainer;
         [SerializeField] private UIDisplayAnswerButton displayAnswerButton;
 
+        [Header("Values")]
+        [SerializeField] private float postAnswerDelay = 1f;
+        [SerializeField] private float countdownTillNext = 3f;
+
         private string _correctAnswer;
 
+        /// <summary>
+        /// Displays a question.
+        /// </summary>
+        /// <param name="questionStructure">The question model</param>
+        /// <param name="number">The question number from the total</param>
+        /// <param name="total">The total number of questions</param>
         public void DisplayQuestion(QuestionStructure questionStructure, int number, int total)
         {
             categoryLabel.text = questionStructure.category;
@@ -33,6 +52,10 @@ namespace Haxsen.Game
             UpdateAnswerList(questionStructure);
         }
 
+        /// <summary>
+        /// Evaluates the selected answer.
+        /// </summary>
+        /// <param name="isCorrect">Whether the answer is correct</param>
         public void EvaluateSelectedAnswer(bool isCorrect)
         {
             ActionPerformedOnQuestion?.Invoke();
@@ -44,19 +67,26 @@ namespace Haxsen.Game
             StartCoroutine(NextQuestionState());
         }
 
+        /// <summary>
+        /// Displays the answer forced by the user.
+        /// </summary>
         public void DisplayAnswer()
         {
             ActionPerformedOnQuestion?.Invoke();
             
             answersContainer.ShowCorrectAnswer();
-            displayAnswerButton.AnswerDisplayed();
+            displayAnswerButton.OnAnswerDisplayed();
 
             StartCoroutine(NextQuestionState());
         }
 
+        /// <summary>
+        /// A coroutine that executes till the next question when current question is complete.
+        /// </summary>
+        /// <returns>Awaits the user till the next question is served</returns>
         private IEnumerator NextQuestionState()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(postAnswerDelay);
             displayAnswerButton.ResetColors();
 
             int nextQuestionNumber = gameSessionManager.GetCurrentQuestionNumber() + 1;
@@ -69,7 +99,7 @@ namespace Haxsen.Game
                 displayAnswerButton.SetCountdownPrefixToGameEnd();
             }
             
-            int countdown = 3;
+            float countdown = countdownTillNext;
             while (countdown >= 0)
             {
                 displayAnswerButton.UpdateCountdown(countdown);
@@ -78,9 +108,13 @@ namespace Haxsen.Game
             }
             
             displayAnswerButton.ResetButton();
-            GameSessionManager.ProceedToNextQuestion?.Invoke();
+            ProceedToNextQuestion?.Invoke();
         }
 
+        /// <summary>
+        /// Randomizes and updates the answer list on the UI.
+        /// </summary>
+        /// <param name="questionStructure">The question model</param>
         private void UpdateAnswerList(QuestionStructure questionStructure)
         {
             List<string> answers = new List<string>();
@@ -90,6 +124,10 @@ namespace Haxsen.Game
             DisplayAnswers(answers);
         }
 
+        /// <summary>
+        /// Displays the answer list on the UI.
+        /// </summary>
+        /// <param name="answers">The list of answers</param>
         private void DisplayAnswers(List<string> answers)
         {
             answersContainer.ClearAnswers();
@@ -99,6 +137,12 @@ namespace Haxsen.Game
             }
         }
 
+        /// <summary>
+        /// Randomizes a List by using Fisher Yates shuffle.
+        /// </summary>
+        /// <param name="list">The desired list to randomize</param>
+        /// <typeparam name="T">The desired type of list</typeparam>
+        /// <returns>List items in random order</returns>
         private List<T> RandomizeList<T>(List<T> list)
         {
             var rnd = new System.Random();

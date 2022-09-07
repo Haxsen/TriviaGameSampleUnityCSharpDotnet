@@ -2,6 +2,9 @@
 
 namespace Haxsen.ScriptableObjects
 {
+    /// <summary>
+    /// A ScriptableObject containing Color options for the game.
+    /// </summary>
     [CreateAssetMenu(fileName = "UIColorOptionsSO", menuName = "ScriptableObjects/UIColorOptions", order = 1)]
     public class UIColorOptionsSO : ScriptableObject
     {

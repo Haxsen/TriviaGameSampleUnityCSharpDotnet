@@ -4,43 +4,64 @@ using UnityEngine;
 
 namespace Haxsen.ScriptableObjects
 {
+    /// <summary>
+    /// A ScriptableObject containing options for OpenTdb API.
+    /// </summary>
     [CreateAssetMenu(fileName = "OpenTdbOptionsSO", menuName = "ScriptableObjects/OpenTdbOptions", order = 1)]
     public class OpenTdbOptionsSO : ScriptableObject
     {
+        private const string OPENTDB_API_URL_FORMAT = "https://opentdb.com/api.php";
+        
+        public const string OPENTDB_API_CATEGORY_FORMAT = "https://opentdb.com/api_category.php";
+        public const string OPENTDB_API_GET_AMOUNT = "amount={0}";
+        public const string OPENTDB_API_GET_CATEGORY = "category={0}";
+        
         [SerializeField] private int numberOfQuestionsToFetch = 10;
         [SerializeField] private CategoryStructure selectedCategory;
-        [SerializeField] private string categoriesUrl;
+
+        public bool IsSelectedCategoryValid() => OpenTdbUrlBuilder.IsCategoryValid(selectedCategory.id);
+        public void ResetCategories() => selectedCategory.id = 0;
         
-        private string _url;
-        
-        public string GetUrl()
+        /// <summary>
+        /// Builds and returns the full URL.
+        /// </summary>
+        /// <returns>The built URL for OpenTdb API</returns>
+        public string GetFullUrl()
         {
-            BuildUrl();
-            return _url;
+            return BuildUrl();
         }
 
-        public string GetCategoriesUrl() => categoriesUrl;
-
+        /// <summary>
+        /// Returns the current CategoryStructure object.
+        /// </summary>
+        /// <returns>The selected category object</returns>
         public CategoryStructure GetSelectedCategory() => selectedCategory;
-
-        public bool IsSelectedCategoryValid() => OpenTdbUrlBuilder.isCategoryValid(selectedCategory.id);
         
+        /// <summary>
+        /// Sets the questions list amount.
+        /// </summary>
+        /// <param name="amount">The amount of questions that will be used to fetch</param>
         public void SetAmount(int amount)
         {
             numberOfQuestionsToFetch = amount;
         }
         
+        /// <summary>
+        /// Sets the category.
+        /// </summary>
+        /// <param name="category">The preferred category</param>
         public void SetCategory(CategoryStructure category)
         {
             selectedCategory = category;
         }
-
-        public void ResetCategories() => selectedCategory.id = 0;
         
-        private void BuildUrl()
+        /// <summary>
+        /// Builds the full URL.
+        /// </summary>
+        /// <returns>The built URL</returns>
+        private string BuildUrl()
         {
-            Debug.Log("Building URL");
-            _url = new OpenTdbUrlBuilder(OpenTdbConfig.OPENTDB_API_URL_FORMAT)
+            return new OpenTdbUrlBuilder(OPENTDB_API_URL_FORMAT)
                 .AddAmount(numberOfQuestionsToFetch)
                 .SelectCategory(selectedCategory.id)
                 .Build();

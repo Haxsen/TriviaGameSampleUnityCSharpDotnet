@@ -2,6 +2,10 @@ using UnityEngine;
 
 namespace Haxsen.Singleton
 {
+    /// <summary>
+    /// Quite basic Singleton of custom type that is kept persistent through the scene changes.
+    /// </summary>
+    /// <typeparam name="T">The desired type to persist</typeparam>
     public class PersistentSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T _instance;

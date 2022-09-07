@@ -2,6 +2,9 @@
 
 namespace Haxsen.ScriptableObjects
 {
+    /// <summary>
+    /// A ScriptableObject containing texts for labels.
+    /// </summary>
     [CreateAssetMenu(fileName = "UILabelOptionsSO", menuName = "ScriptableObjects/UILabelOptions", order = 1)]
     public class UILabelOptionsSO : ScriptableObject
     {
