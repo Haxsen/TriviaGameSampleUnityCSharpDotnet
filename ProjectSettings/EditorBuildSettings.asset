@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scripts/Scenes/MainScene.unity
-    guid: 7a9020bdf0625427cb7a2a8bde0bb209
+    path: Assets/Scenes/TriviaGameScene.unity
+    guid: d052910fd50165a45a2cc6bec6836918
   m_configObjects: {}
